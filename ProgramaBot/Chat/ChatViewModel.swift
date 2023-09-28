@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ChatViewModel: ObservableObject {
+@MainActor class ChatViewModel: ObservableObject {
     @Published var messages: [Message] = []
     @Published var userInput: String = ""
     private var apiClient: ChatAPIClient
