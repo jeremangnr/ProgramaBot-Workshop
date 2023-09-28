@@ -8,8 +8,10 @@
 import Foundation
 
 @MainActor class ChatViewModel: ObservableObject {
-    @Published var messages: [Message] = []
-    @Published var userInput: String = ""
+    // 1. Create var for list of messages
+    
+    // 2. Create var for userInput
+    
     private var apiClient: ChatAPIClient
     
     init(apiClient: ChatAPIClient = ChatAPIClient()) {
@@ -17,11 +19,11 @@ import Foundation
     }
     
     func sendMessage() async {
-        // 1. Create user message
+        // 3. Create user message
         
-        // 2. Call API Client
+        // 4. Call API Client
         
-        // 3. Show message
+        // 5. Show message
     }
 }
 
