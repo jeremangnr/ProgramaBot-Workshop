@@ -12,19 +12,12 @@ struct ChatView: View {
     
     var body: some View {
         VStack {
-            List(viewModel.messages) { message in
-                MessageView(message: message)
-            }
+            // 1. Show message list
             
             HStack {
-                TextField("Type a message...", text: $viewModel.userInput)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .showClearButton($viewModel.userInput)
-                Button("Send") {
-                    Task {
-                        await viewModel.sendMessage()
-                    }
-                }
+                // 2. Show text field for input
+                
+                // 3. Show "Send" button, call viewModel.sendMessage on tap
             }.padding()
         }
     }

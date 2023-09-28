@@ -17,19 +17,11 @@ import Foundation
     }
     
     func sendMessage() async {
-        guard !userInput.isEmpty else { return }
-        let userMessage = Message(role: .user, content: userInput)
-        messages.append(userMessage)
+        // 1. Create user message
         
-        do {
-            if let botMessage = try await apiClient.fetchBotMessage(msgHistory: messages) {
-                messages.append(botMessage)
-                userInput = ""
-            }
-        } catch {
-            // Handle error gracefully, e.g. show an error message to the user
-            print("Failed to send message: \(error.localizedDescription)")
-        }
+        // 2. Call API Client
+        
+        // 3. Show message
     }
 }
 

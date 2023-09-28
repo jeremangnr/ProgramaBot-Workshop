@@ -11,38 +11,15 @@ struct ChatAPIClient {
     let systemPrompt = "You are an expert iOS developer with over 15 years of experience, specializing in helping young programmers learn and understand Apple's ecosystem. Your vast knowledge includes SwiftUI, UIKit, Swift, Objective-C, and other iOS technologies. You love to share your expertise and guide newcomers through the fascinating world of iOS development."
     
     func fetchBotMessage(msgHistory: [Message]) async throws -> Message? {
-        let urlString = "https://api.openai.com/v1/chat/completions"
-        guard let url = URL(string: urlString) else {
-            throw APIClientError.invalidURL
-        }
+        // 1. Create URLRequest
         
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("Bearer YOUR_OPENAI_KEY", forHTTPHeaderField: "Authorization")
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        // 2. Set headers / encode httpBody
         
-        var msgs = msgHistory
-        msgs.insert(Message(role: .system, content: systemPrompt), at: 0)
+        // 3. Send request
         
-        let chatRequest = ChatRequest(model: "gpt-3.5-turbo", messages: msgs)
+        // 4. Decode response
         
-        do {
-            let encoder = JSONEncoder()
-            request.httpBody = try encoder.encode(chatRequest)
-            
-            print("Sending request: \(chatRequest)")
-            let (data, response) = try await URLSession.shared.data(for: request)
-            print("Got response: \(response)")
-            
-            let decoder = JSONDecoder()
-            let chatResponse = try decoder.decode(ChatResponse.self, from: data)
-            
-            if let choice = chatResponse.choices.first {
-                return choice.message
-            }
-        } catch {
-            throw APIClientError.failedToDecode
-        }
+        // 5. Return message
         
         return nil
     }
